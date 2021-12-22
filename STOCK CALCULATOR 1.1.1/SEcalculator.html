@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+h {
+    color: darkgreen;
+        font-size: 30px;
+        font-family:Arial;
+        text-align: center;
+
+} 
+p {
+    color: darkblue;
+        font-family:Arial;
+} 
+
+c {
+    text-decoration: underline;
+    font-weight: 750;
+    text-align: center;
+}
+
+body {
+    background-color: lightgrey;
+            font-family:Arial;
+
+}
+button {
+    background-color: yellow;
+    font-size: 16px; 
+    text-align: center; 
+}
+
+d {
+    text-align: center;
+}
+
+</style>
+</head>
+  <body>
+    <h><h1>Stock Calculator</h1></h>
+       <c><p>Used to calculate Break Even Price and to estimate the re entry point for rebuying the share with specified minimum gain.</p></c> 
+    <d><p>Enter the number of shares, buy price, sell price and required minimum gain if you want to rebuy the shares</p></d>
+    <br/>
+    <div style="text-align: center; font-size: large; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+    Number of share units  &nbsp :
+    <input type="number" id="txt1" name="text1" value=1 min=1 step=1>
+        <br/>
+        <br/>
+
+    Buy price (USD) &nbsp &nbsp &nbsp:
+    <input type="number" id="txt2" name="text2" value=0.01 min=0.01 step=0.01>
+    <br/>
+    <br/>
+    
+    Sell price (USD) &nbsp &nbsp &nbsp:
+    <input type="number" id="txt3" name="text3" value=0.02 min=0.01 step=0.01>
+    <br/>
+    <br/>
+    
+    Minimum Gain (USD) &nbsp &nbsp :
+    <input type="number" id="txt4" name="text4" value=0>
+    <br/>
+    <br/>
+</div>
+    <div style="text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"><button onclick="myFunction()">Calculate</button></div>
+    
+<div style="text-align: center; font-size: large; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+    <p id="totalCost"> Here the total cost will be displayed </p>
+        <p id="breakP"> Break even price will be displayed </p>
+        <p id="SellP"> Sell Value will be displayed </p>
+        <p id="reEnter"> Required Re entry point </p>
+        </div>
+        <h6 id="timing" > </h6>
+        
+
+    <script>
+       document.getElementById("timing").innerHTML = Date();
+      function myFunction() {
+        var commission=11.95;
+        var tax=0.005;
+        
+        var ns = document.getElementById("txt1").value;
+        var z = document.getElementById("txt2").value;
+        var sell=document.getElementById("txt3").value;
+        var ReEnterGain=document.getElementById("txt4").value;
+
+        
+        var x = (Number(ns) *Number(z)*(1+tax))+commission;
+        document.getElementById("totalCost").innerHTML = "Total cost = "+ x;
+        totalCost=x;
+        bp=(x+commission)/Number(ns)
+        
+        
+        document.getElementById("breakP").innerHTML = "Break Price = "+ bp;
+        sp=sell*Number(ns)-commission
+        gain=sp-totalCost
+
+        document.getElementById("SellP").innerHTML = "Sell value = "+sp+" with gain "+ gain.toFixed(3) +" USD";
+        
+        nbp=(sp-ReEnterGain-commission)/((1+tax)*ns)
+        document.getElementById("reEnter").innerHTML = "ReEnter value can be equal of less than "+ Number(nbp) +" USD for a gain of "+ReEnterGain+" &nbsp USD" ;
+       
+
+      }      
+    </script>
+    <h6>SOFTWARE VERSION 1.2.1<h6>
+        <h6>MADE BY GRANT BAUMSTARK</h6>
+    
+    
+    
+    
+    
+  </body>
+</html>
